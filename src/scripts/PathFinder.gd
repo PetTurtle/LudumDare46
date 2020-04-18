@@ -5,12 +5,14 @@ export(Vector2) var topRight
 export(Vector2) var bottomLeft
 
 onready var tileMap : TileMap = $TileMap
+onready var units = $Units
 var spawners : Array
-var units
 
 func _ready():
-	units = get_parent().get_node("Units")
-	spawners = get_parent().get_node("Spawners").get_children()
+	for node in get_children():
+		if node is Spawner:
+			spawners.append(node)
+			node.connect("spawn", self, "_on_spawn")
 
 func block_cell(pos : Vector2, id : int = 1) -> void:
 	var tile_pos : Vector2 = tileMap.world_to_map(pos)
@@ -48,3 +50,6 @@ func _can_reach_king(x : int, y : int) -> bool:
 	
 func _spawner_can_reach(id : int) -> bool:
 	return units.can_reach_king(spawners[id].position)
+	
+func _on_spawn(unit_name, position : Vector2):
+	units.create(unit_name, position)

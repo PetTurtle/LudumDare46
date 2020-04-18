@@ -1,9 +1,9 @@
 extends CanvasLayer
 class_name UI
 
-signal mode_default()
+#signal mode_default()
 signal mode_place(unit_name)
-signal mode_remove()
+#signal mode_remove()
 
 onready var tower_container = $TowerContainer
 

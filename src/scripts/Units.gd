@@ -6,8 +6,8 @@ var nav : PathFinder
 var kingPos : Vector2
 
 func _ready():
-	nav = get_parent().get_node("PathFinder")
-	kingPos = get_parent().get_node("Towers").get_king().position
+	nav = get_parent()
+	kingPos = get_parent().get_node("King").position
 
 func create(name : String, spawnPos : Vector2) -> void:
 	var unit_def : UnitDef = load("res://resources/units/"+name+".tres")

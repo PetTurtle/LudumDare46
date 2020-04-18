@@ -7,4 +7,3 @@ script = ExtResource( 1 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

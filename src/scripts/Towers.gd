@@ -16,8 +16,5 @@ func create(name : String, spawnPos : Vector2) -> void:
 	
 	tower.position = spawnPos
 
-func can_place(pos : Vector2) -> bool:
-	return true
-
 func get_king() -> Node2D:
 	return get_node("King") as Node2D
