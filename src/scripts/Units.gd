@@ -2,11 +2,11 @@ extends YSort
 class_name Units
 
 var unit_prefab = load("res://prefabs/Unit.tscn")
-var nav : Navigation2D
+var nav : PathFinder
 var kingPos : Vector2
 
 func _ready():
-	nav = get_parent().get_node("Navigation2D")
+	nav = get_parent().get_node("PathFinder")
 	kingPos = get_parent().get_node("Towers").get_king().position
 
 func create(name : String, spawnPos : Vector2) -> void:
@@ -18,7 +18,6 @@ func create(name : String, spawnPos : Vector2) -> void:
 	unit.path = nav.get_simple_path(spawnPos, kingPos, false)
 	
 func update_paths():
-	print("Update")
 	var children = get_children()
 	for i in range(children.size()):
 		children[i].path = nav.get_simple_path(children[i].position, kingPos, false)

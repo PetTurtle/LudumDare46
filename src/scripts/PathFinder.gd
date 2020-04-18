@@ -1,9 +1,12 @@
 extends Navigation2D
 class_name PathFinder
 
+export(Vector2) var topRight
+export(Vector2) var bottomLeft
+
 onready var tileMap : TileMap = $TileMap
 var spawners : Array
-var units : Units
+var units
 
 func _ready():
 	units = get_parent().get_node("Units")

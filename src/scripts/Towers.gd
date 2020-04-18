@@ -1,21 +1,20 @@
 extends YSort
 class_name Towers
 
-var unit_prefab = load("res://prefabs/Unit.tscn")
+var tower_prefab = load("res://prefabs/Tower.tscn")
 
-var nav : Navigation2D
-var tileMap : TileMap
+var nav : PathFinder
+var towers = []
 
 func _ready():
-	nav = get_parent().get_node("Navigation2D")
-	tileMap = nav.get_node("TileMap")
+	nav = get_parent().get_node("PathFinder")
 
 func create(name : String, spawnPos : Vector2) -> void:
-	var unit_def : UnitDef = load("res://resources/towers/"+name+".tres")
-	var unit : Unit = unit_prefab.instance()
-	add_child(unit)
-	unit.set_Unit(unit_def)
-	unit.position = spawnPos
+	var tower_def : UnitDef = load("res://resources/towers/"+name+".tres")
+	var tower : Tower = tower_prefab.instance()
+	add_child(tower)
+	
+	tower.position = spawnPos
 
 func can_place(pos : Vector2) -> bool:
 	return true

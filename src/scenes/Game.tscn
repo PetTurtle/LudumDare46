@@ -1,12 +1,22 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://prefabs/King.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/dice.png" type="Texture" id=2]
 [ext_resource path="res://prefabs/Spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Units.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Towers.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=6]
 [ext_resource path="res://scripts/PathFinder.gd" type="Script" id=7]
+[ext_resource path="res://prefabs/Tower.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/Queen.png" type="Texture" id=9]
+[ext_resource path="res://assets/Knight.png" type="Texture" id=10]
+[ext_resource path="res://assets/Rook.png" type="Texture" id=11]
+[ext_resource path="res://assets/Pawn.png" type="Texture" id=12]
+[ext_resource path="res://prefabs/King.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/Bishops.png" type="Texture" id=14]
+[ext_resource path="res://script_ui/PlaceButton.gd" type="Script" id=15]
+[ext_resource path="res://script_ui/UI.gd" type="Script" id=16]
+[ext_resource path="res://script_ui/TowerContainer.gd" type="Script" id=17]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
@@ -15,14 +25,14 @@ script = ExtResource( 6 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="Navigation2D" type="Navigation2D" parent="."]
+[node name="PathFinder" type="Navigation2D" parent="."]
 script = ExtResource( 7 )
 
-[node name="TileMap" type="TileMap" parent="Navigation2D"]
+[node name="TileMap" type="TileMap" parent="PathFinder"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -196620, 0, 0, -196619, 0, 0, -196618, 0, 0, -196617, 0, 0, -196616, 0, 0, -196615, 0, 0, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 131063, 0, 0, 131064, 0, 0, 131065, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 196599, 0, 0, 196600, 0, 0, 196601, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0 )
+tile_data = PoolIntArray( -327690, 3, 0, -327689, 3, 0, -327688, 3, 0, -327687, 3, 0, -327686, 3, 0, -327685, 3, 0, -327684, 3, 0, -327683, 3, 0, -327682, 3, 0, -327681, 3, 0, -393216, 3, 0, -393215, 3, 0, -393214, 3, 0, -393213, 3, 0, -393212, 3, 0, -393211, 3, 0, -393210, 3, 0, -393209, 3, 0, -393208, 3, 0, -393207, 3, 0, -393206, 3, 0, -262155, 5, 0, -262154, 5, 0, -262153, 5, 0, -262152, 5, 0, -262151, 5, 0, -262150, 5, 0, -262149, 5, 0, -262148, 5, 0, -262147, 5, 0, -262146, 5, 0, -262145, 5, 0, -327680, 5, 0, -327679, 5, 0, -327678, 5, 0, -327677, 5, 0, -327676, 5, 0, -327675, 5, 0, -327674, 5, 0, -327673, 5, 0, -327672, 5, 0, -327671, 5, 0, -327670, 5, 0, -196619, 0, 0, -196618, 0, 0, -196617, 0, 0, -196616, 0, 0, -196615, 0, 0, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 1610612736, 0, -131083, 1610612739, 0, -131082, -1610612730, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 6, 0, -196598, 1610612739, 0, -65546, -1073741821, 0, -65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 1, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, -1610612733, 0, -10, -1073741821, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 1, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, -1610612733, 0, 65526, -1073741821, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, -1610612733, 0, 131062, -1073741821, 0, 131063, 0, 0, 131064, 0, 0, 131065, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, -1610612733, 0, 196598, -1073741821, 0, 196599, 0, 0, 196600, 0, 0, 196601, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, -1610612733, 0, 262134, -1073741822, 0, 262135, 1610612739, 0, 262136, 1610612739, 0, 262137, 1610612739, 0, 262138, 1610612739, 0, 262139, 1610612739, 0, 262140, 1610612739, 0, 262141, 1610612739, 0, 262142, 1610612739, 0, 262143, 1610612739, 0, 196608, 1610612739, 0, 196609, 1610612739, 0, 196610, 1610612739, 0, 196611, 1610612739, 0, 196612, 1610612739, 0, 196613, 1610612739, 0, 196614, 1610612739, 0, 196615, 1610612739, 0, 196616, 1610612739, 0, 196617, 1610612738, 0 )
 
 [node name="Units" type="YSort" parent="."]
 script = ExtResource( 4 )
@@ -30,9 +40,84 @@ script = ExtResource( 4 )
 [node name="Towers" type="YSort" parent="."]
 script = ExtResource( 5 )
 
-[node name="King" parent="Towers" instance=ExtResource( 2 )]
+[node name="King" parent="Towers" instance=ExtResource( 13 )]
+
+[node name="Tower" parent="Towers" instance=ExtResource( 8 )]
+position = Vector2( -8, -8.34002 )
+
+[node name="Tower2" parent="Towers" instance=ExtResource( 8 )]
+position = Vector2( -8, -24.1179 )
 
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( -151.681, -56.3539 )
+position = Vector2( -168.88, -56.6313 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 16 )
+
+[node name="TowerContainer" type="HBoxContainer" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_bottom = -20.0
+alignment = 1
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonWall" type="Button" parent="UI/TowerContainer"]
+margin_left = 112.0
+margin_right = 166.0
+margin_bottom = 35.0
+text = "Wall"
+icon = ExtResource( 2 )
+script = ExtResource( 15 )
+unit_name = "Unit Name"
+
+[node name="ButtonPawn" type="Button" parent="UI/TowerContainer"]
+margin_left = 170.0
+margin_right = 233.0
+margin_bottom = 35.0
+text = "Pawn"
+icon = ExtResource( 12 )
+script = ExtResource( 15 )
+unit_name = "Pawn"
+
+[node name="ButtonKnight" type="Button" parent="UI/TowerContainer"]
+margin_left = 237.0
+margin_right = 307.0
+margin_bottom = 35.0
+text = "Knight"
+icon = ExtResource( 10 )
+script = ExtResource( 15 )
+unit_name = "Knight"
+
+[node name="ButtonBishop" type="Button" parent="UI/TowerContainer"]
+margin_left = 311.0
+margin_right = 385.0
+margin_bottom = 35.0
+text = "Bishop"
+icon = ExtResource( 14 )
+script = ExtResource( 15 )
+unit_name = "Bishop"
+
+[node name="ButtonRook" type="Button" parent="UI/TowerContainer"]
+margin_left = 389.0
+margin_right = 450.0
+margin_bottom = 35.0
+text = "Rook"
+icon = ExtResource( 11 )
+script = ExtResource( 15 )
+unit_name = "Rook"
+
+[node name="ButtonQueen" type="Button" parent="UI/TowerContainer"]
+margin_left = 454.0
+margin_right = 527.0
+margin_bottom = 35.0
+text = "Queen"
+icon = ExtResource( 9 )
+script = ExtResource( 15 )
+unit_name = "Queen"

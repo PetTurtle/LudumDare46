@@ -19,10 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Spawner.gd"
 }, {
+"base": "Node2D",
+"class": "Tower",
+"language": "GDScript",
+"path": "res://scripts/Tower.gd"
+}, {
+"base": "Resource",
+"class": "TowerDef",
+"language": "GDScript",
+"path": "res://scripts/TowerDef.gd"
+}, {
 "base": "YSort",
 "class": "Towers",
 "language": "GDScript",
 "path": "res://scripts/Towers.gd"
+}, {
+"base": "CanvasLayer",
+"class": "UI",
+"language": "GDScript",
+"path": "res://script_ui/UI.gd"
 }, {
 "base": "Area2D",
 "class": "Unit",
@@ -42,7 +57,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "PathFinder": "",
 "Spawner": "",
+"Tower": "",
+"TowerDef": "",
 "Towers": "",
+"UI": "",
 "Unit": "",
 "UnitDef": "",
 "Units": ""
@@ -63,4 +81,5 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+environment/default_clear_color=Color( 0.164706, 0.14902, 0.180392, 1 )
 environment/default_environment="res://default_env.tres"
