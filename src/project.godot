@@ -8,15 +8,58 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Navigation2D",
+"class": "PathFinder",
+"language": "GDScript",
+"path": "res://scripts/PathFinder.gd"
+}, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://scripts/Spawner.gd"
+}, {
+"base": "YSort",
+"class": "Towers",
+"language": "GDScript",
+"path": "res://scripts/Towers.gd"
+}, {
+"base": "Area2D",
+"class": "Unit",
+"language": "GDScript",
+"path": "res://scripts/Unit.gd"
+}, {
+"base": "Resource",
+"class": "UnitDef",
+"language": "GDScript",
+"path": "res://scripts/UnitDef.gd"
+}, {
+"base": "YSort",
+"class": "Units",
+"language": "GDScript",
+"path": "res://scripts/Units.gd"
+} ]
 _global_script_class_icons={
-
+"PathFinder": "",
+"Spawner": "",
+"Towers": "",
+"Unit": "",
+"UnitDef": "",
+"Units": ""
 }
 
 [application]
 
 config/name="King's Table"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=360
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 
