@@ -11,7 +11,7 @@ func _ready():
 func set_Tower(value : TowerDef) -> void:
 	sprite = $Sprite
 	towerDef = value
-	sprite.texture = value.texture	
+	sprite.texture = value.texture
 
 func _on_FireTimer_timeout():
 	pass # Replace with function body.

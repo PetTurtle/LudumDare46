@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Navigator.gd"
 }, {
-"base": "Navigation2D",
-"class": "PathFinder",
-"language": "GDScript",
-"path": "res://scripts/PathFinder.gd"
-}, {
 "base": "Node2D",
 "class": "Spawner",
 "language": "GDScript",
@@ -63,16 +58,10 @@ _global_script_classes=[ {
 "class": "UnitManager",
 "language": "GDScript",
 "path": "res://scripts/UnitManager.gd"
-}, {
-"base": "YSort",
-"class": "Units",
-"language": "GDScript",
-"path": "res://scripts/Units.gd"
 } ]
 _global_script_class_icons={
 "GameMap": "",
 "Navigator": "",
-"PathFinder": "",
 "Spawner": "",
 "Tower": "",
 "TowerDef": "",
@@ -80,8 +69,7 @@ _global_script_class_icons={
 "UI": "",
 "Unit": "",
 "UnitDef": "",
-"UnitManager": "",
-"Units": ""
+"UnitManager": ""
 }
 
 [application]

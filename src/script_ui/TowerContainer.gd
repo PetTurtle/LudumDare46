@@ -1,17 +1,10 @@
 extends HBoxContainer
 
 signal place_unit(name)
+signal mode_sell()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var children = get_children()
-	for i in range(children.size()):
-		children[i].connect("place_unit", self, "_on_place_unit")
+	pass
 
 func show_towers():
 	pass
@@ -21,3 +14,7 @@ func hide_towers():
 	
 func _on_place_unit(unit_name):
 	emit_signal("place_unit", unit_name)
+
+
+func _on_ButtonSell_pressed():
+	emit_signal("mode_sell")

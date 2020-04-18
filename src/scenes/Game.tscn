@@ -35,18 +35,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonWall" type="Button" parent="UI/TowerContainer"]
-margin_left = 112.0
-margin_right = 166.0
+[node name="ButtonDice" type="Button" parent="UI/TowerContainer"]
+margin_left = 92.0
+margin_right = 147.0
 margin_bottom = 35.0
-text = "Wall"
+text = "Dice"
 icon = ExtResource( 2 )
 script = ExtResource( 15 )
-unit_name = "Unit Name"
+unit_name = "Dice"
 
 [node name="ButtonPawn" type="Button" parent="UI/TowerContainer"]
-margin_left = 170.0
-margin_right = 233.0
+margin_left = 151.0
+margin_right = 214.0
 margin_bottom = 35.0
 text = "Pawn"
 icon = ExtResource( 12 )
@@ -54,8 +54,8 @@ script = ExtResource( 15 )
 unit_name = "Pawn"
 
 [node name="ButtonKnight" type="Button" parent="UI/TowerContainer"]
-margin_left = 237.0
-margin_right = 307.0
+margin_left = 218.0
+margin_right = 288.0
 margin_bottom = 35.0
 text = "Knight"
 icon = ExtResource( 10 )
@@ -63,8 +63,8 @@ script = ExtResource( 15 )
 unit_name = "Knight"
 
 [node name="ButtonBishop" type="Button" parent="UI/TowerContainer"]
-margin_left = 311.0
-margin_right = 385.0
+margin_left = 292.0
+margin_right = 366.0
 margin_bottom = 35.0
 text = "Bishop"
 icon = ExtResource( 14 )
@@ -72,8 +72,8 @@ script = ExtResource( 15 )
 unit_name = "Bishop"
 
 [node name="ButtonRook" type="Button" parent="UI/TowerContainer"]
-margin_left = 389.0
-margin_right = 450.0
+margin_left = 370.0
+margin_right = 431.0
 margin_bottom = 35.0
 text = "Rook"
 icon = ExtResource( 11 )
@@ -81,15 +81,22 @@ script = ExtResource( 15 )
 unit_name = "Rook"
 
 [node name="ButtonQueen" type="Button" parent="UI/TowerContainer"]
-margin_left = 454.0
-margin_right = 527.0
+margin_left = 435.0
+margin_right = 508.0
 margin_bottom = 35.0
 text = "Queen"
 icon = ExtResource( 9 )
 script = ExtResource( 15 )
 unit_name = "Queen"
 
+[node name="ButtonSell" type="Button" parent="UI/TowerContainer"]
+margin_left = 512.0
+margin_right = 547.0
+margin_bottom = 35.0
+text = "Sell"
+
 [node name="Map1" parent="." instance=ExtResource( 18 )]
 
 [node name="Towers" type="YSort" parent="."]
 script = ExtResource( 5 )
+[connection signal="pressed" from="UI/TowerContainer/ButtonSell" to="UI/TowerContainer" method="_on_ButtonSell_pressed"]
