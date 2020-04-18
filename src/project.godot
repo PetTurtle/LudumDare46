@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://scripts/Bullet.gd"
+}, {
+"base": "YSort",
+"class": "Bullets",
+"language": "GDScript",
+"path": "res://scripts/Bullets.gd"
+}, {
+"base": "Node2D",
 "class": "GameMap",
 "language": "GDScript",
 "path": "res://scripts/Map.gd"
@@ -60,6 +70,8 @@ _global_script_classes=[ {
 "path": "res://scripts/UnitManager.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
+"Bullets": "",
 "GameMap": "",
 "Navigator": "",
 "Spawner": "",

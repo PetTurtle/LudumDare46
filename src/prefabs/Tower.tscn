@@ -11,6 +11,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -11 )
 
 [node name="FireTimer" type="Timer" parent="."]
-one_shot = true
+wait_time = 2.0
 autostart = true
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

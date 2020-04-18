@@ -10,7 +10,8 @@ func _ready() -> void:
 	set_process(false)
 	
 func _process(delta: float) -> void:
-	_move_along_path(speed * delta)
+	var move_distance = speed * delta
+	_move_along_path(move_distance)
 
 func set_Unit(value : UnitDef) -> void:
 	sprite = $Sprite

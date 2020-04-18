@@ -8,6 +8,7 @@ enum Mode {
 
 onready var ui : UI = $UI
 onready var towers : Towers = $Towers
+onready var bullets : Bullets = $Bullets
 onready var map : GameMap = $Map1 # TODO LEVEL Loading System
 
 var mode : int = Mode.IDLE
@@ -52,3 +53,6 @@ func _on_mode_buy(name):
 func _on_mode_sell():
 	print("SELL")
 	mode = Mode.SELL
+	
+func _on_fire(position, moves, direction):
+	bullets.create(position, moves, direction)
