@@ -14,3 +14,7 @@ func create(pos : Vector2, moves : bool , direction : Vector2):
 	var bullet : Bullet = bullet_prefab.instance()
 	add_child(bullet)
 	bullet.set_bullet(pos, moves, direction, gameMap)
+
+func clear_all():
+	for node in get_children():
+		node.queue_free()

@@ -11,7 +11,10 @@ var max_value : int = 100
 var value_left : int = 0
 var spawnPoints = []
 
+var game_data : GameData
+
 func _ready():
+	game_data = get_node("/root/GameData")
 	timer.connect("timeout", self, "_on_spawn")
 	for node in get_children():
 		if node is Node2D:
@@ -19,6 +22,7 @@ func _ready():
 
 func next_wave():
 	waveCount += 1
+	game_data.set_wave_count(waveCount)
 	value_left = int(get_wave_value(waveCount))
 	timer.paused = false
 	

@@ -40,3 +40,7 @@ func _on_timer() -> void:
 
 func _on_fire(position, moves, direction):
 	emit_signal("fire", position, moves, direction)
+	
+func clear_all():
+	for node in ySort.get_children():
+		node.queue_free()

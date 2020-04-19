@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/dice.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://script_ui/PlaceButton.gd" type="Script" id=15]
 [ext_resource path="res://script_ui/UI.gd" type="Script" id=16]
 [ext_resource path="res://script_ui/TowerContainer.gd" type="Script" id=17]
+[ext_resource path="res://script_ui/GameOverPanel.gd" type="Script" id=18]
 [ext_resource path="res://script_ui/LivesPanel.gd" type="Script" id=19]
 [ext_resource path="res://assets/coin/Coin9.png" type="Texture" id=20]
 [ext_resource path="res://assets/coin/Coin11.png" type="Texture" id=21]
@@ -66,6 +67,13 @@ animations = [ {
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.196078, 0.164706, 0.164706, 0.4 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -77,6 +85,7 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 16 )
 
 [node name="TowerContainer" type="HBoxContainer" parent="UI"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -149,6 +158,7 @@ margin_bottom = 36.0
 text = "Sell"
 
 [node name="NextWaveContainer" type="Panel" parent="UI"]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -171,6 +181,7 @@ __meta__ = {
 }
 
 [node name="StatsPanel" type="Panel" parent="UI"]
+visible = false
 anchor_left = 0.999347
 anchor_right = 0.999347
 margin_left = -84.5818
@@ -211,7 +222,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-frame = 8
+frame = 9
 speed_scale = 2.0
 playing = true
 centered = false
@@ -240,48 +251,8 @@ frame = 1
 playing = true
 centered = false
 
-[node name="PausePanel" type="Panel" parent="UI"]
-pause_mode = 2
-visible = false
-modulate = Color( 1, 1, 1, 0.478431 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PausedLabel" type="Label" parent="UI/PausePanel"]
-anchor_left = 0.5
-anchor_top = 0.519
-anchor_right = 0.5
-anchor_bottom = 0.519
-margin_left = -23.0
-margin_top = -13.84
-margin_right = 23.0
-margin_bottom = 0.159973
-text = "Paused"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PausedLabel2" type="Label" parent="UI/PausePanel/PausedLabel"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -48.5
-margin_top = 5.45822
-margin_right = 48.5
-margin_bottom = 19.4582
-text = "ESC to unpause"
-align = 1
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MenuPanel" type="Panel" parent="UI"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -371,6 +342,115 @@ enabled_focus_mode = 0
 icon = ExtResource( 36 )
 flat = true
 
+[node name="PausePanel" type="Panel" parent="UI"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.237839
+margin_bottom = -0.237854
+custom_styles/panel = SubResource( 5 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI/PausePanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = -50.0
+margin_right = 63.0
+margin_bottom = 59.0
+custom_styles/panel = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -54.5
+margin_right = 60.0
+margin_bottom = 54.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PausePanel/Panel/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 38 )
+text = "Paused"
+align = 1
+valign = 1
+
+[node name="ContinueButton" type="Button" parent="UI/PausePanel/Panel/VBoxContainer"]
+margin_top = 40.0
+margin_right = 120.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+text = "Continue"
+
+[node name="MenuButton" type="Button" parent="UI/PausePanel/Panel/VBoxContainer"]
+margin_top = 68.0
+margin_right = 120.0
+margin_bottom = 92.0
+custom_fonts/font = ExtResource( 3 )
+text = "Exit"
+
+[node name="GameOverPanel" type="Panel" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = -39.0
+margin_right = 76.0
+margin_bottom = 39.0
+custom_styles/panel = SubResource( 7 )
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverPanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="UI/GameOverPanel/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 34 )
+text = "Checkmate!"
+align = 1
+valign = 1
+
+[node name="WaveLabel" type="Label" parent="UI/GameOverPanel/VBoxContainer"]
+margin_top = 22.0
+margin_right = 148.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 3 )
+text = "Wave: 0"
+align = 1
+valign = 1
+
+[node name="ContinueButton" type="Button" parent="UI/GameOverPanel/VBoxContainer"]
+margin_top = 44.0
+margin_right = 148.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+text = "Conitune"
+
 [node name="Bullets" type="YSort" parent="."]
 script = ExtResource( 1 )
 
@@ -385,3 +465,5 @@ autostart = true
 [connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/LeftButton" to="UI/MenuPanel" method="prev_level"]
 [connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/PlayButton" to="UI/MenuPanel" method="play"]
 [connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/RightButton" to="UI/MenuPanel" method="next_level"]
+[connection signal="pressed" from="UI/PausePanel/Panel/VBoxContainer/ContinueButton" to="UI/PausePanel" method="unpause"]
+[connection signal="pressed" from="UI/GameOverPanel/VBoxContainer/ContinueButton" to="UI/GameOverPanel" method="_on_continue"]

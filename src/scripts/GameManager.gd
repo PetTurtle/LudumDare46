@@ -6,6 +6,7 @@ signal coin_update(value)
 signal king_damaged(lives_left)
 signal game_start()
 signal gameover()
+signal main_menu()
 
 var map_index = 0
 var maps = []
@@ -22,14 +23,21 @@ func _ready():
 	game.load_map(maps[map_index])
 
 func _input(_input):
-	if Input.is_action_just_released("game_pause") and active:
-		_toggle_pause()
+	if Input.is_action_just_pressed("game_pause") and active:
+		toggle_pause()
 
 func new_game():
 	lives = 10
 	coins = 500
 	active = true
 	emit_signal("game_start")
+	emit_signal("coin_update", coins)
+	emit_signal("king_damaged", lives)
+	
+func main_menu():
+	emit_signal("main_menu")
+	game.load_map(maps[map_index])
+	active = false
 	
 func next_map():
 	map_index = (map_index + 1) % maps.size()
@@ -53,7 +61,7 @@ func set_coins(value : int):
 func get_coins() -> int:
 	return coins
 
-func _toggle_pause():
+func toggle_pause():
 	get_tree().paused = !get_tree().paused
 	if get_tree().paused:
 		emit_signal("pause")

@@ -23,6 +23,8 @@ func _ready():
 	ui.connect("mode_sell", self, "_on_mode_sell")
 	ui.connect("next_wave", self, "_on_next_wave")
 	game_manager.connect("game_start", self, "start_game")
+	game_manager.connect("gameover", self, "game_over")
+	game_manager.connect("main_menu", self, "end_game")
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
@@ -65,8 +67,14 @@ func start_game():
 	ui.mode_game()
 	bullets.set_map(map)
 	
+func game_over():
+	ui.mode_game_over()
+	
 func end_game():
 	ui.mode_menu()
+	game_data.clear_all()
+	bullets.clear_all()
+	towers.clear_all()
 		
 func load_map(map_prefab):
 	if map != null:
