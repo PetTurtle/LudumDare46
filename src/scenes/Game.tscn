@@ -42,7 +42,7 @@
 [ext_resource path="res://scripts/TileGhost.gd" type="Script" id=40]
 [ext_resource path="res://assets/X.png" type="Texture" id=41]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=1]
 resource_name = "Open"
 length = 0.5
 tracks/0/type = "value"
@@ -58,7 +58,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 370 ), Vector2( 0, 320 ), Vector2( 0, 300 ), Vector2( 0, 330 ), Vector2( 0, 320 ) ]
 }
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Button
 
 signal next_wave()
@@ -67,7 +67,7 @@ func _pressed():
 	emit_signal(\"next_wave\")
 "
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "Open"
 length = 0.5
 tracks/0/type = "value"
@@ -83,9 +83,9 @@ tracks/0/keys = {
 "values": [ Vector2( -35.21, 60 ), Vector2( -35.21, 5 ), Vector2( -35.21, 20 ), Vector2( -35.2102, 10.3367 ), Vector2( -35.2102, 10.3367 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=11]
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 30 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 31 ), ExtResource( 21 ), ExtResource( 23 ) ],
 "loop": true,
@@ -93,7 +93,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 33 ), ExtResource( 32 ) ],
 "loop": true,
@@ -101,7 +101,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "Open"
 length = 0.5
 tracks/0/type = "value"
@@ -117,14 +117,14 @@ tracks/0/keys = {
 "values": [ Vector2( 100, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=8]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.196078, 0.164706, 0.164706, 0.4 )
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=10]
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="StyleBoxEmpty" id=11]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
@@ -203,7 +203,7 @@ margin_bottom = 38.0
 icon = ExtResource( 41 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TowerContainer"]
-anims/Open = SubResource( 8 )
+anims/Open = SubResource( 1 )
 
 [node name="NextWaveContainer" type="Panel" parent="UI"]
 anchor_left = 1.0
@@ -226,13 +226,13 @@ margin_top = -0.463288
 margin_right = -35.2102
 margin_bottom = -0.463032
 text = "Next Wave"
-script = SubResource( 1 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/NextWaveContainer"]
-anims/Open = SubResource( 9 )
+anims/Open = SubResource( 3 )
 
 [node name="StatsPanel" type="Panel" parent="UI"]
 anchor_left = 0.999347
@@ -241,7 +241,7 @@ margin_left = -84.5818
 margin_top = 9.0
 margin_right = -6.58179
 margin_bottom = 90.0
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 4 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
@@ -277,8 +277,8 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
 scale = Vector2( 2, 2 )
-frames = SubResource( 2 )
-frame = 4
+frames = SubResource( 5 )
+frame = 6
 speed_scale = 2.0
 playing = true
 centered = false
@@ -302,13 +302,12 @@ valign = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/LivesPanel"]
 position = Vector2( 2.13086, -0.19371 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 3 )
-frame = 1
+frames = SubResource( 6 )
 playing = true
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StatsPanel"]
-anims/Open = SubResource( 10 )
+anims/Open = SubResource( 7 )
 
 [node name="MenuPanel" type="Panel" parent="UI"]
 visible = false
@@ -320,7 +319,7 @@ margin_left = -100.0
 margin_top = -54.5
 margin_right = 100.0
 margin_bottom = 54.5
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 8 )
 script = ExtResource( 39 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -408,7 +407,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -0.237839
 margin_bottom = -0.237854
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 9 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -423,7 +422,7 @@ margin_left = -56.0
 margin_top = -50.0
 margin_right = 63.0
 margin_bottom = 59.0
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -473,7 +472,7 @@ margin_left = -76.0
 margin_top = -39.0
 margin_right = 76.0
 margin_bottom = 39.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 11 )
 script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false

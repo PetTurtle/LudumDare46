@@ -3,6 +3,8 @@ class_name Tower
 
 signal fire(position, moves, direction)
 
+onready var animation : AnimationPlayer = $AnimationPlayer
+
 var sprite : Sprite
 var tower_def : TowerDef
 
@@ -18,5 +20,7 @@ func get_def() -> TowerDef:
 	return tower_def
 
 func fire():
+	animation.play("Jump")
 	for pos in tower_def.fireDirections:
 		emit_signal("fire", position + (pos * 16), tower_def.recursively_fire, pos)
+		
