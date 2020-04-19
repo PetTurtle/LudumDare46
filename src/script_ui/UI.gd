@@ -12,10 +12,14 @@ onready var stats_panel = $StatsPanel
 onready var menu_panel = $MenuPanel
 onready var game_over_panel = $GameOverPanel
 
+var game_manager : GameManager
+
 func _ready():
+	game_manager = get_node("/root/GameManager")
 	tower_container.connect("place_unit", self, "_on_place_unit")
 	tower_container.connect("mode_sell", self, "_on_mode_sell")
 	next_wave_container.connect("next_wave", self, "_on_next_wave")
+	game_manager.connect("wave_over", self, "_on_wave_over")
 	mode_menu()
 	
 
@@ -48,3 +52,7 @@ func _on_mode_sell():
 
 func _on_next_wave():
 	emit_signal("next_wave")
+	
+func _on_wave_over():
+	if game_manager.is_game_active():
+		next_wave_container.show_panel(true)

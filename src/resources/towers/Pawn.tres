@@ -8,5 +8,5 @@ script = ExtResource( 1 )
 name = "Pawn"
 cost = 150
 recursively_fire = false
-texture = ExtResource( 2 )
+textures = [ ExtResource( 2 ) ]
 fireDirections = [ Vector2( 1, 0 ), Vector2( 0, 1 ), Vector2( -1, 0 ), Vector2( 0, -1 ) ]

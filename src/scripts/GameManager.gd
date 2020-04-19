@@ -4,8 +4,9 @@ signal pause()
 signal unpause()
 signal coin_update(value)
 signal king_damaged(lives_left)
+signal game_over()
 signal game_start()
-signal gameover()
+signal wave_over()
 signal main_menu()
 
 var map_index = 0
@@ -55,7 +56,10 @@ func damage_king():
 	emit_signal("king_damaged", lives)
 	if lives <= 0:
 		active = false
-		emit_signal("gameover")
+		emit_signal("game_over")
+		
+func is_game_active() -> bool:
+	return active
 		
 func set_coins(value : int):
 	coins = value
@@ -70,6 +74,9 @@ func toggle_pause():
 		emit_signal("pause")
 	else:
 		emit_signal("unpause")
+		
+func wave_over():
+	emit_signal("wave_over")
 
 func _load_maps():
 	var dir = Directory.new()

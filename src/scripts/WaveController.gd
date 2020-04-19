@@ -12,9 +12,11 @@ var value_left : int = 0
 var spawnPoints = []
 
 var game_data : GameData
+var game_manager : GameManager
 
 func _ready():
 	game_data = get_node("/root/GameData")
+	game_manager = get_node("/root/GameManager")
 	timer.connect("timeout", self, "_on_spawn")
 	for node in get_children():
 		if node is Node2D:
@@ -45,3 +47,4 @@ func _on_spawn():
 		emit_signal("spawn", value, spawnPoints[iterator].position)
 	else:
 		timer.paused = true
+		game_manager.wave_over()

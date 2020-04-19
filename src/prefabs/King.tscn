@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/King.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.67477
+radius = 8.00881
 
 [node name="King" type="Area2D"]
 script = ExtResource( 2 )

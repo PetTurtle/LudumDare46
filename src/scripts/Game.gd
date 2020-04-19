@@ -9,6 +9,7 @@ enum Mode {
 onready var ui : UI = $UI
 onready var towers : Towers = $Towers
 onready var bullets : Bullets = $Bullets
+onready var tile_ghost : TileGhost = $TileGhost
 
 var game_manager : GameManager
 var game_data : GameData
@@ -23,15 +24,26 @@ func _ready():
 	ui.connect("mode_sell", self, "_on_mode_sell")
 	ui.connect("next_wave", self, "_on_next_wave")
 	game_manager.connect("game_start", self, "start_game")
-	game_manager.connect("gameover", self, "game_over")
+	game_manager.connect("game_over", self, "game_over")
 	game_manager.connect("main_menu", self, "end_game")
 	
+func _process(_delta):
+	tile_ghost.hide_ghost()
+	match mode:
+		Mode.IDLE:
+			pass
+		Mode.BUY:
+			if map.can_build_turret():
+				tile_ghost.show_ghost(map.get_snapped_mouse_position(), game_data.get_tower_def(tower_name).get_default_texture())
+		Mode.SELL:
+			if map.has_turret():
+				tile_ghost.show_ghost(map.get_snapped_mouse_position())
+				
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
 	if not event.is_pressed():
 		return
-
 	if event.button_index == BUTTON_LEFT:
 		match mode:
 			Mode.IDLE: # ____IDLE____
@@ -66,6 +78,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func start_game():
 	ui.mode_game()
 	bullets.set_map(map)
+	tile_ghost.set_map(map)
 	
 func game_over():
 	ui.mode_game_over()

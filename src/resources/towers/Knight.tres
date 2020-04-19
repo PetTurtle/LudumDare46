@@ -8,5 +8,5 @@ script = ExtResource( 1 )
 name = "Knight"
 cost = 350
 recursively_fire = false
-texture = ExtResource( 2 )
+textures = [ ExtResource( 2 ) ]
 fireDirections = [ Vector2( 2, -1 ), Vector2( 2, 1 ), Vector2( -2, -1 ), Vector2( -2, 1 ), Vector2( -1, 2 ), Vector2( 1, 2 ), Vector2( -1, -2 ), Vector2( 1, -2 ) ]

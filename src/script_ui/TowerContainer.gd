@@ -3,6 +3,8 @@ extends HBoxContainer
 signal place_unit(name)
 signal mode_sell()
 
+onready var animation : AnimationPlayer = $AnimationPlayer
+
 func _ready():
 	pass
 
@@ -19,4 +21,7 @@ func _on_ButtonSell_pressed():
 	emit_signal("mode_sell")
 
 func show_panel(value : bool):
-	visible = value
+	if value:
+		animation.play("Open")
+	else:
+		animation.play_backwards("Open")

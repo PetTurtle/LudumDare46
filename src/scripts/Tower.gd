@@ -12,7 +12,7 @@ func _ready():
 func set_Tower(value : TowerDef) -> void:
 	sprite = $Sprite
 	tower_def = value
-	sprite.texture = value.texture
+	sprite.texture = value.get_texture()
 
 func get_def() -> TowerDef:
 	return tower_def

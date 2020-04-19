@@ -1,12 +1,17 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://scripts/TowerDef.gd" type="Script" id=1]
-[ext_resource path="res://assets/dice.png" type="Texture" id=2]
+[ext_resource path="res://assets/dice/Dice3.png" type="Texture" id=2]
+[ext_resource path="res://assets/dice/Dice4.png" type="Texture" id=3]
+[ext_resource path="res://assets/dice/Dice1.png" type="Texture" id=4]
+[ext_resource path="res://assets/dice/Dice6.png" type="Texture" id=5]
+[ext_resource path="res://assets/dice/Dice5.png" type="Texture" id=6]
+[ext_resource path="res://assets/dice/Dice2.png" type="Texture" id=7]
 
 [resource]
 script = ExtResource( 1 )
 name = "Dice"
 cost = 50
 recursively_fire = false
-texture = ExtResource( 2 )
+textures = [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ) ]
 fireDirections = [  ]
