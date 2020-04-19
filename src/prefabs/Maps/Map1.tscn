@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/Map.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Navigator.gd" type="Script" id=4]
 [ext_resource path="res://scripts/UnitManager.gd" type="Script" id=5]
-[ext_resource path="res://prefabs/Spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/WaveController.gd" type="Script" id=7]
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 3 )
@@ -24,8 +24,18 @@ script = ExtResource( 5 )
 
 [node name="Units" type="YSort" parent="UnitManager"]
 
-[node name="Spawner" parent="UnitManager" instance=ExtResource( 6 )]
-position = Vector2( -135.146, -56.7792 )
+[node name="WaveController" type="Node2D" parent="UnitManager"]
+script = ExtResource( 7 )
+
+[node name="Timer" type="Timer" parent="UnitManager/WaveController"]
+wait_time = 0.1
+autostart = true
+
+[node name="SpawnPoint" type="Node2D" parent="UnitManager/WaveController"]
+position = Vector2( -135.203, -56.8737 )
+
+[node name="SpawnPoint2" type="Node2D" parent="UnitManager/WaveController"]
+position = Vector2( -135.884, 41.889 )
 
 [node name="King" parent="." instance=ExtResource( 2 )]
 position = Vector2( 103.984, -7.40585 )

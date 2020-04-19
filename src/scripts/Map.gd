@@ -8,6 +8,9 @@ onready var king : Node2D = $King
 func _ready():
 	unit_manager.connect("set_path", self, "_on_set_path")
 
+func next_wave():
+	unit_manager.next_wave()
+
 func build_turret():
 	var pos = navigator.get_mouse_tile_position()
 	navigator.build(pos.x, pos.y)

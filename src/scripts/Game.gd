@@ -17,6 +17,7 @@ var map : GameMap
 func _ready():
 	ui.connect("mode_buy", self, "_on_mode_buy")
 	ui.connect("mode_sell", self, "_on_mode_sell")
+	ui.connect("next_wave", self, "_on_next_wave")
 	map = get_node("Map1") # TODO LEVEL Loading System
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -59,3 +60,6 @@ func _on_mode_sell():
 func _on_fire(pos, moves, direction):
 	if map.is_pathable(pos):
 		bullets.create(pos, moves, direction)
+		
+func _on_next_wave():
+	map.next_wave()

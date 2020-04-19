@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/TowerDef.gd"
 }, {
-"base": "YSort",
+"base": "Node2D",
 "class": "Towers",
 "language": "GDScript",
 "path": "res://scripts/Towers.gd"
@@ -68,6 +68,11 @@ _global_script_classes=[ {
 "class": "UnitManager",
 "language": "GDScript",
 "path": "res://scripts/UnitManager.gd"
+}, {
+"base": "Node2D",
+"class": "WaveController",
+"language": "GDScript",
+"path": "res://scripts/WaveController.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -81,7 +86,8 @@ _global_script_class_icons={
 "UI": "",
 "Unit": "",
 "UnitDef": "",
-"UnitManager": ""
+"UnitManager": "",
+"WaveController": ""
 }
 
 [application]

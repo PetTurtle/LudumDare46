@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/dice.png" type="Texture" id=2]
+[ext_resource path="res://scenes/NextWavePanel.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Towers.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=6]
 [ext_resource path="res://assets/Queen.png" type="Texture" id=9]
@@ -13,6 +14,15 @@
 [ext_resource path="res://script_ui/UI.gd" type="Script" id=16]
 [ext_resource path="res://script_ui/TowerContainer.gd" type="Script" id=17]
 [ext_resource path="res://prefabs/Maps/Map1.tscn" type="PackedScene" id=18]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+signal next_wave()
+
+func _pressed():
+	emit_signal(\"next_wave\")
+"
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
@@ -96,11 +106,38 @@ margin_right = 547.0
 margin_bottom = 36.0
 text = "Sell"
 
+[node name="NextWaveContainer" type="Panel" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -81.0
+margin_top = -54.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextWaveButton" type="Button" parent="UI/NextWaveContainer"]
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Next Wave"
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map1" parent="." instance=ExtResource( 18 )]
 
 [node name="Bullets" type="YSort" parent="."]
 script = ExtResource( 1 )
 
-[node name="Towers" type="YSort" parent="."]
+[node name="Towers" type="Node2D" parent="."]
 script = ExtResource( 5 )
+
+[node name="YSort" type="YSort" parent="Towers"]
+
+[node name="Timer" type="Timer" parent="Towers"]
+autostart = true
 [connection signal="pressed" from="UI/TowerContainer/ButtonSell" to="UI/TowerContainer" method="_on_ButtonSell_pressed"]

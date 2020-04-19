@@ -1,8 +1,11 @@
 extends Area2D
 class_name Unit
 
-var health : int = 10
-var speed : float = 10
+signal death()
+
+var speed : float = 30
+
+var health : int = 1
 var sprite : Sprite = null
 var path : = PoolVector2Array() setget set_path
 
@@ -13,11 +16,11 @@ func _process(delta: float) -> void:
 	var move_distance = speed * delta
 	_move_along_path(move_distance)
 
-func set_Unit(value : UnitDef) -> void:
+func set_Unit(value : int) -> void:
 	sprite = $Sprite
-	health = value.max_health
-	speed = value.speed
-	sprite.texture = value.texture
+	health = value
+	sprite.scale.x = 0.5 + health * 0.02
+	sprite.scale.y = 0.5 + health * 0.02
 
 func _move_along_path(distance : float) -> void:
 	var start_point = position
@@ -38,9 +41,15 @@ func damage(amount : int):
 	health = health - amount
 	if health <= 0:
 		queue_free()
+	else:
+		sprite.scale.x = 0.5 + health * 0.02
+		sprite.scale.y = 0.5 + health * 0.02
 
 func set_path(value : PoolVector2Array) -> void:
 	path = value
 	if value.size() == 0:
 		return
 	set_process(true)
+	
+func _exit_tree():
+	emit_signal("death")
