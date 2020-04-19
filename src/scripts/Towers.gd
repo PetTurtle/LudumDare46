@@ -13,8 +13,7 @@ func _ready():
 	connect("fire", get_parent(), "_on_fire")
 	timer.connect("timeout", self, "_on_timer")
 
-func create(name : String, spawnPos : Vector2) -> void:
-	var tower_def : TowerDef = load("res://resources/towers/"+name+".tres")
+func create(tower_def : TowerDef, spawnPos : Vector2) -> void:
 	var tower : Tower = tower_prefab.instance()
 	ySort.add_child(tower)
 	tower.set_Tower(tower_def)
@@ -25,6 +24,12 @@ func remove_at(pos : Vector2):
 		if tower.position == pos + offset:
 			tower.queue_free()
 			return
+			
+func tower_def_at(pos : Vector2) -> TowerDef:
+	for tower in ySort.get_children():
+		if tower.position == pos + offset:
+			return tower.get_def()
+	return null
 
 func get_king() -> Node2D:
 	return get_node("King") as Node2D

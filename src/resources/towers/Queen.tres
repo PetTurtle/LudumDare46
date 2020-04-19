@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Queen"
-cost = 50
+cost = 500
 recursively_fire = true
 texture = ExtResource( 2 )
 fireDirections = [ Vector2( 1, 1 ), Vector2( -1, -1 ), Vector2( 1, -1 ), Vector2( -1, 1 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 0, -1 ) ]

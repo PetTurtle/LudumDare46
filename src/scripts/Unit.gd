@@ -1,7 +1,7 @@
 extends Area2D
 class_name Unit
 
-signal death()
+signal death(value)
 
 var speed : float = 30
 
@@ -52,4 +52,4 @@ func set_path(value : PoolVector2Array) -> void:
 	set_process(true)
 	
 func _exit_tree():
-	emit_signal("death")
+	emit_signal("death", 1)

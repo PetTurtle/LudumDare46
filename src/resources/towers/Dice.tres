@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Dice"
-cost = 5
+cost = 50
 recursively_fire = false
 texture = ExtResource( 2 )
 fireDirections = [  ]

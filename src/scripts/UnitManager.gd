@@ -3,6 +3,7 @@ class_name UnitManager
 
 signal set_path(unit)
 signal wave_over()
+signal unit_killed(value)
 
 onready var ySort : YSort = $Units
 onready var wave_controller : WaveController = $WaveController
@@ -32,8 +33,9 @@ func _on_spawn(value : int, positon : Vector2):
 	unit.connect("death", self, "_on_death")
 	unit_count += 1
 	
-func _on_death():
+func _on_death(value):
 	unit_count -= 1
+	emit_signal("unit_killed", value)
 	if unit_count == 0 and wave_controller.is_wave_over():
 		print("Over")
 		emit_signal("wave_over")

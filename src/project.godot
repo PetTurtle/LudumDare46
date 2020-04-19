@@ -96,6 +96,11 @@ config/name="King's Table"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+GameData="*res://scripts/GameData.gd"
+
 [display]
 
 window/size/width=640

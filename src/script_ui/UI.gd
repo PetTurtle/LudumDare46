@@ -4,10 +4,11 @@ class_name UI
 #signal mode_default()
 signal mode_buy(unit_name)
 signal mode_sell()
-signal next_wave()
+signal next_wave(value)
 
 onready var tower_container = $TowerContainer
 onready var next_wave_container = $NextWaveContainer
+onready var coins_panel = $CoinsPanel
 
 func _ready():
 	tower_container.connect("place_unit", self, "_on_place_unit")
@@ -22,3 +23,6 @@ func _on_mode_sell():
 
 func _on_next_wave():
 	emit_signal("next_wave")
+
+func update_coins(amount : int):
+	coins_panel.update_coins(amount)
