@@ -10,20 +10,19 @@ onready var ui : UI = $UI
 onready var towers : Towers = $Towers
 onready var bullets : Bullets = $Bullets
 
+var game_manager : GameManager
 var game_data : GameData
 var mode : int = Mode.IDLE
 var tower_name : String
 var map : GameMap
-var coins : int = 500
 
 func _ready():
+	game_data = get_node("/root/GameData")
+	game_manager = get_node("/root/GameManager")
 	ui.connect("mode_buy", self, "_on_mode_buy")
 	ui.connect("mode_sell", self, "_on_mode_sell")
 	ui.connect("next_wave", self, "_on_next_wave")
-	map = get_node("Map1") # TODO LEVEL Loading
-	map.connect("unit_killed", self, "_on_kill")
-	ui.update_coins(coins)
-	game_data = get_node("/root/GameData")
+	game_manager.connect("game_start", self, "start_game")
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
@@ -37,11 +36,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				pass
 			Mode.BUY: # ____BUY____
 				var cost = game_data.get_tower_cost(tower_name)
-				if map.can_build_turret() and cost <= coins:
+				if map.can_build_turret() and cost <= game_manager.get_coins():
 					map.build_turret()
 					towers.create(game_data.get_tower_def(tower_name), map.get_snapped_mouse_position())
-					coins -= cost
-					ui.update_coins(coins)
+					game_manager.set_coins(game_manager.get_coins() - cost)
 					game_data.add_tower(tower_name)
 					
 			Mode.SELL: # ____SELL____
@@ -51,9 +49,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					var cost = game_data.get_tower_cost(tower_def.name)
 					map.clear_turret()
 					towers.remove_at(pos)
-					coins += cost/2
+					game_manager.set_coins(game_manager.get_coins() + cost/2)
 					game_data.remove_tower(tower_def.name)
-					ui.update_coins(coins)
 					
 	elif event.button_index == BUTTON_RIGHT:
 		match mode:
@@ -63,16 +60,22 @@ func _unhandled_input(event: InputEvent) -> void:
 				mode = Mode.IDLE
 			Mode.SELL: # ____SELL____
 				mode = Mode.IDLE
+	
+func start_game():
+	ui.mode_game()
+	bullets.set_map(map)
+	
+func end_game():
+	ui.mode_menu()
 		
-func get_map() -> GameMap:
-	return get_node("Map1") as GameMap
-
-func set_coins(amount : int):
-	coins = amount
-	ui.update_coins(amount)
-
-func get_coins() -> int:
-	return coins
+func load_map(map_prefab):
+	if map != null:
+		delete_map()
+	map = map_prefab.instance()
+	add_child(map)
+		
+func delete_map():
+	map.queue_free()
 
 func _on_mode_buy(name):
 	mode = Mode.BUY
@@ -87,6 +90,3 @@ func _on_fire(pos, moves, direction):
 		
 func _on_next_wave():
 	map.next_wave()
-
-func _on_kill(value):
-	set_coins(get_coins()+value)

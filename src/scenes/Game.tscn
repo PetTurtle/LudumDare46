@@ -1,21 +1,43 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/dice.png" type="Texture" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://scenes/NextWavePanel.gd" type="Script" id=4]
+[ext_resource path="res://fonts/FutureSquare.tres" type="DynamicFont" id=3]
+[ext_resource path="res://script_ui/NextWavePanel.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Towers.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=6]
 [ext_resource path="res://script_ui/CoinsPanel.gd" type="Script" id=7]
+[ext_resource path="res://script_ui/PausePanel.gd" type="Script" id=8]
 [ext_resource path="res://assets/Queen.png" type="Texture" id=9]
 [ext_resource path="res://assets/Knight.png" type="Texture" id=10]
 [ext_resource path="res://assets/Rook.png" type="Texture" id=11]
 [ext_resource path="res://assets/Pawn.png" type="Texture" id=12]
+[ext_resource path="res://script_ui/StatsPanel.gd" type="Script" id=13]
 [ext_resource path="res://assets/Bishops.png" type="Texture" id=14]
 [ext_resource path="res://script_ui/PlaceButton.gd" type="Script" id=15]
 [ext_resource path="res://script_ui/UI.gd" type="Script" id=16]
 [ext_resource path="res://script_ui/TowerContainer.gd" type="Script" id=17]
-[ext_resource path="res://prefabs/Maps/Map1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://script_ui/LivesPanel.gd" type="Script" id=19]
+[ext_resource path="res://assets/coin/Coin9.png" type="Texture" id=20]
+[ext_resource path="res://assets/coin/Coin11.png" type="Texture" id=21]
+[ext_resource path="res://assets/coin/Coin4.png" type="Texture" id=22]
+[ext_resource path="res://assets/coin/Coin12.png" type="Texture" id=23]
+[ext_resource path="res://assets/coin/Coin5.png" type="Texture" id=24]
+[ext_resource path="res://assets/coin/Coin7.png" type="Texture" id=25]
+[ext_resource path="res://assets/coin/Coin6.png" type="Texture" id=26]
+[ext_resource path="res://assets/coin/Coin1.png" type="Texture" id=27]
+[ext_resource path="res://assets/coin/Coin2.png" type="Texture" id=28]
+[ext_resource path="res://assets/coin/Coin8.png" type="Texture" id=29]
+[ext_resource path="res://assets/coin/Coin3.png" type="Texture" id=30]
+[ext_resource path="res://assets/coin/Coin10.png" type="Texture" id=31]
+[ext_resource path="res://assets/heart/Heart2.png" type="Texture" id=32]
+[ext_resource path="res://assets/heart/Heart1.png" type="Texture" id=33]
+[ext_resource path="res://fonts/Thick.tres" type="DynamicFont" id=34]
+[ext_resource path="res://fonts/Pixel Square.tres" type="DynamicFont" id=35]
+[ext_resource path="res://assets/Arrow/Arrow2.png" type="Texture" id=36]
+[ext_resource path="res://assets/Arrow/Arrow1.png" type="Texture" id=37]
+[ext_resource path="res://fonts/FutureLevelLabel.tres" type="DynamicFont" id=38]
+[ext_resource path="res://script_ui/MenuPanel.gd" type="Script" id=39]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -25,6 +47,24 @@ signal next_wave()
 func _pressed():
 	emit_signal(\"next_wave\")
 "
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 30 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 31 ), ExtResource( 21 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 33 ), ExtResource( 32 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 6 )
@@ -130,48 +170,206 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoinsPanel" type="Panel" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -75.0
+[node name="StatsPanel" type="Panel" parent="UI"]
+anchor_left = 0.999347
+anchor_right = 0.999347
+margin_left = -84.5818
 margin_top = 9.0
-margin_right = -7.0
-margin_bottom = 52.0
-script = ExtResource( 7 )
+margin_right = -6.58179
+margin_bottom = 90.0
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/CoinsPanel"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -13.5
-margin_right = 69.0
-margin_bottom = 50.5
-rect_scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/StatsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/CoinsPanel"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -35.0
-margin_top = -21.5
-margin_bottom = 21.5
-text = "0"
+[node name="CoinsPanel" type="PanelContainer" parent="UI/StatsPanel/VBoxContainer"]
+margin_right = 78.0
+margin_bottom = 32.0
+script = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 71.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 3 )
+text = "310"
 align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Map1" parent="." instance=ExtResource( 18 )]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+frame = 8
+speed_scale = 2.0
+playing = true
+centered = false
+
+[node name="LivesPanel" type="PanelContainer" parent="UI/StatsPanel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 78.0
+margin_bottom = 68.0
+script = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="UI/StatsPanel/VBoxContainer/LivesPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 71.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 3 )
+text = "10"
+align = 2
+valign = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/LivesPanel"]
+position = Vector2( 2.13086, -0.19371 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+centered = false
+
+[node name="PausePanel" type="Panel" parent="UI"]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.478431 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PausedLabel" type="Label" parent="UI/PausePanel"]
+anchor_left = 0.5
+anchor_top = 0.519
+anchor_right = 0.5
+anchor_bottom = 0.519
+margin_left = -23.0
+margin_top = -13.84
+margin_right = 23.0
+margin_bottom = 0.159973
+text = "Paused"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PausedLabel2" type="Label" parent="UI/PausePanel/PausedLabel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -48.5
+margin_top = 5.45822
+margin_right = 48.5
+margin_bottom = 19.4582
+text = "ESC to unpause"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuPanel" type="Panel" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -54.5
+margin_right = 100.0
+margin_bottom = 54.5
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="UI/MenuPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -82.5
+margin_top = 3.99564
+margin_right = 82.5
+margin_bottom = 21.9956
+custom_fonts/font = ExtResource( 34 )
+custom_colors/font_color = Color( 0.905882, 0.85098, 0.905882, 1 )
+text = "Kings Board"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelPanel" type="VBoxContainer" parent="UI/MenuPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -71.0
+margin_right = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="UI/MenuPanel/LevelPanel"]
+margin_right = 200.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 38 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="UI/MenuPanel/LevelPanel"]
+margin_top = 40.0
+margin_right = 200.0
+margin_bottom = 78.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftButton" type="Button" parent="UI/MenuPanel/LevelPanel/HBox"]
+margin_left = 23.0
+margin_right = 67.0
+margin_bottom = 38.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
+icon = ExtResource( 37 )
+flat = true
+
+[node name="PlayButton" type="Button" parent="UI/MenuPanel/LevelPanel/HBox"]
+margin_left = 71.0
+margin_right = 129.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 35 )
+text = "Play"
+
+[node name="RightButton" type="Button" parent="UI/MenuPanel/LevelPanel/HBox"]
+margin_left = 133.0
+margin_right = 177.0
+margin_bottom = 38.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
+icon = ExtResource( 36 )
+flat = true
 
 [node name="Bullets" type="YSort" parent="."]
 script = ExtResource( 1 )
@@ -184,3 +382,6 @@ script = ExtResource( 5 )
 [node name="Timer" type="Timer" parent="Towers"]
 autostart = true
 [connection signal="pressed" from="UI/TowerContainer/ButtonSell" to="UI/TowerContainer" method="_on_ButtonSell_pressed"]
+[connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/LeftButton" to="UI/MenuPanel" method="prev_level"]
+[connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/PlayButton" to="UI/MenuPanel" method="play"]
+[connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/RightButton" to="UI/MenuPanel" method="next_level"]

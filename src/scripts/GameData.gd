@@ -11,6 +11,8 @@ var cost_multi = 0.1
 func _ready():
 	_load_towers()
 	
+	
+	
 func get_tower_def(name : String) -> TowerDef:
 	var key = towers_to_key[name]
 	return towers[key]
@@ -22,10 +24,12 @@ func get_tower_cost(name : String) -> int:
 func add_tower(name : String):
 	var key = towers_to_key[name]
 	tower_count[key] += 1
+	emit_signal("tower_placed")
 	
 func remove_tower(name : String):
 	var key = towers_to_key[name]
 	tower_count[key] -= 1
+	emit_signal("tower_removed")
 
 func _load_towers():
 	var key = 0

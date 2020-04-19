@@ -5,8 +5,10 @@ var bullet_prefab = load("res://prefabs/Bullet.tscn")
 var gameMap : GameMap
 
 func _ready():
-	gameMap = get_parent().get_map()
-	print(gameMap)
+	pass
+	
+func set_map(map : GameMap):
+	gameMap = map
 
 func create(pos : Vector2, moves : bool , direction : Vector2):
 	var bullet : Bullet = bullet_prefab.instance()

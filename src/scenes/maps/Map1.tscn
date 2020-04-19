@@ -8,6 +8,7 @@
 [ext_resource path="res://scripts/WaveController.gd" type="Script" id=7]
 
 [node name="Map" type="Node2D"]
+z_index = -1
 script = ExtResource( 3 )
 
 [node name="Navigator" type="Navigation2D" parent="."]

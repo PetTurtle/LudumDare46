@@ -8,12 +8,27 @@ signal next_wave(value)
 
 onready var tower_container = $TowerContainer
 onready var next_wave_container = $NextWaveContainer
-onready var coins_panel = $CoinsPanel
+onready var stats_panel = $StatsPanel
+onready var menu_panel = $MenuPanel
 
 func _ready():
 	tower_container.connect("place_unit", self, "_on_place_unit")
 	tower_container.connect("mode_sell", self, "_on_mode_sell")
 	next_wave_container.connect("next_wave", self, "_on_next_wave")
+	mode_menu()
+	
+
+func mode_game():
+	tower_container.show_panel(true)
+	next_wave_container.show_panel(true)
+	stats_panel.show_panel(true)
+	menu_panel.show_panel(false)
+	
+func mode_menu():
+	tower_container.show_panel(false)
+	next_wave_container.show_panel(false)
+	stats_panel.show_panel(false)
+	menu_panel.show_panel(true)
 
 func _on_place_unit(unit_name):
 	emit_signal("mode_buy", unit_name)
@@ -23,6 +38,3 @@ func _on_mode_sell():
 
 func _on_next_wave():
 	emit_signal("next_wave")
-
-func update_coins(amount : int):
-	coins_panel.update_coins(amount)

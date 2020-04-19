@@ -10,3 +10,6 @@ func _ready():
 
 func _on_pressed():
 	emit_signal("next_wave")
+
+func show_panel(value : bool):
+	visible = value

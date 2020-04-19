@@ -19,7 +19,6 @@ func set_bullet(pos : Vector2, _moves : bool, direction : Vector2, game_map : Ga
 	dir = direction * 16
 	map = game_map
 	
-	
 func collision(area):
 	if area is Unit:
 		area.damage(1)

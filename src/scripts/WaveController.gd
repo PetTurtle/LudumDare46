@@ -19,7 +19,7 @@ func _ready():
 
 func next_wave():
 	waveCount += 1
-	value_left = get_wave_value(waveCount)
+	value_left = int(get_wave_value(waveCount))
 	timer.paused = false
 	
 func get_wave_value(index) -> float:
@@ -34,7 +34,7 @@ func is_wave_over():
 func _on_spawn():
 	if value_left > 0:
 		iterator = (iterator + 1) % spawnPoints.size()
-		var value : int = rand_range(1, min(waveCount, max_value))
+		var value : int = int(rand_range(1, min(waveCount, max_value)))
 		if value > value_left:
 			value = value_left
 		value_left -= value

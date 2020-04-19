@@ -1,0 +1,8 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://fonts/ttf/Kenney Future Square.ttf" type="DynamicFontData" id=1]
+
+[resource]
+outline_size = 2
+outline_color = Color( 0.172549, 0.168627, 0.168627, 1 )
+font_data = ExtResource( 1 )

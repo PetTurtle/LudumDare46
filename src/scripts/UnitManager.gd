@@ -8,10 +8,12 @@ signal unit_killed(value)
 onready var ySort : YSort = $Units
 onready var wave_controller : WaveController = $WaveController
 
+var game_manager : GameManager
 var unit_prefab = load("res://prefabs/Unit.tscn")
 var unit_count : int = 0
 
 func _ready():
+	game_manager = get_node("/root/GameManager")
 	wave_controller.connect("spawn", self, "_on_spawn")
 	
 func next_wave():
@@ -35,7 +37,7 @@ func _on_spawn(value : int, positon : Vector2):
 	
 func _on_death(value):
 	unit_count -= 1
+	game_manager.set_coins(game_manager.get_coins() + value)
 	emit_signal("unit_killed", value)
 	if unit_count == 0 and wave_controller.is_wave_over():
-		print("Over")
 		emit_signal("wave_over")

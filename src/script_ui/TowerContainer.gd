@@ -15,6 +15,8 @@ func hide_towers():
 func _on_place_unit(unit_name):
 	emit_signal("place_unit", unit_name)
 
-
 func _on_ButtonSell_pressed():
 	emit_signal("mode_sell")
+
+func show_panel(value : bool):
+	visible = value
