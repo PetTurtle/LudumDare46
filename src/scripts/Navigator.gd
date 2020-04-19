@@ -38,3 +38,6 @@ func get_mouse_tile_position() -> Vector2:
 	
 func get_snapped_tile_position() -> Vector2:
 	return tileMap.map_to_world(get_mouse_tile_position())
+
+func get_pos_tile_position(pos : Vector2) -> Vector2:
+	return tileMap.world_to_map(pos)

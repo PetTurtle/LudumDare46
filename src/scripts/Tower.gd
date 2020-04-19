@@ -16,9 +16,5 @@ func set_Tower(value : TowerDef) -> void:
 	sprite.texture = value.texture
 
 func _on_FireTimer_timeout():
-	var multi : int = 16
-	if towerDef.recursively_fire:
-		multi == 8
-		
 	for pos in towerDef.fireDirections:
-		emit_signal("fire", position + (pos * multi), towerDef.recursively_fire, pos)
+		emit_signal("fire", position + (pos * 16), towerDef.recursively_fire, pos)

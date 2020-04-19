@@ -33,6 +33,11 @@ func _move_along_path(distance : float) -> void:
 		distance -= distance_to_next
 		start_point = path[0]
 		path.remove(0)
+		
+func damage(amount : int):
+	health = health - amount
+	if health <= 0:
+		queue_free()
 
 func set_path(value : PoolVector2Array) -> void:
 	path = value

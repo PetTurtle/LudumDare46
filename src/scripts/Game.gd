@@ -9,14 +9,15 @@ enum Mode {
 onready var ui : UI = $UI
 onready var towers : Towers = $Towers
 onready var bullets : Bullets = $Bullets
-onready var map : GameMap = $Map1 # TODO LEVEL Loading System
 
 var mode : int = Mode.IDLE
 var tower_name : String
+var map : GameMap
 
 func _ready():
 	ui.connect("mode_buy", self, "_on_mode_buy")
 	ui.connect("mode_sell", self, "_on_mode_sell")
+	map = get_node("Map1") # TODO LEVEL Loading System
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
@@ -45,14 +46,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			Mode.SELL: # ____SELL____
 				mode = Mode.IDLE
 		
+func get_map() -> GameMap:
+	return get_node("Map1") as GameMap
 
 func _on_mode_buy(name):
 	mode = Mode.BUY
 	tower_name = name
 	
 func _on_mode_sell():
-	print("SELL")
 	mode = Mode.SELL
 	
-func _on_fire(position, moves, direction):
-	bullets.create(position, moves, direction)
+func _on_fire(pos, moves, direction):
+	if map.is_pathable(pos):
+		bullets.create(pos, moves, direction)

@@ -30,6 +30,10 @@ func has_turret() -> bool:
 	var pos = navigator.get_mouse_tile_position()
 	return navigator.has_build(pos.x, pos.y)
 	
+func is_pathable(pos : Vector2) -> bool:
+	var mapPos = navigator.get_pos_tile_position(pos)
+	return navigator.has_tile(mapPos.x, mapPos.y) and !navigator.has_build(mapPos.x, mapPos.y)
+	
 func get_snapped_mouse_position() -> Vector2:
 	return navigator.get_snapped_tile_position()
 
