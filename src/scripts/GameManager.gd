@@ -46,6 +46,9 @@ func next_map():
 func prev_map():
 	map_index = (map_index - 1) % maps.size()
 	game.load_map(maps[map_index])
+	
+func get_map_index() -> int:
+	return map_index + 1
 
 func damage_king():
 	lives -= 1
