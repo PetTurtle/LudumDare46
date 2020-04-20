@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/TurretIcons/TurretIcons1.png" type="Texture" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://assets/X.png" type="Texture" id=41]
 [ext_resource path="res://audio/place.wav" type="AudioStream" id=42]
 [ext_resource path="res://audio/remove.wav" type="AudioStream" id=43]
+[ext_resource path="res://audio/button_press.wav" type="AudioStream" id=44]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Open"
@@ -67,8 +68,12 @@ script/source = "extends Button
 
 signal next_wave()
 
+onready var audio : AudioStreamPlayer = $AudioStreamPlayer
+
 func _pressed():
 	emit_signal(\"next_wave\")
+	audio.pitch_scale = rand_range(0.8, 1.2)
+	audio.play()
 "
 
 [sub_resource type="Animation" id=4]
@@ -206,6 +211,10 @@ icon = ExtResource( 2 )
 script = ExtResource( 15 )
 unit_name = "Dice"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonDice"]
+stream = ExtResource( 44 )
+volume_db = -20.0
+
 [node name="ButtonPawn" type="Button" parent="UI/TowerContainer"]
 margin_left = 210.0
 margin_right = 254.0
@@ -213,6 +222,10 @@ margin_bottom = 38.0
 icon = ExtResource( 14 )
 script = ExtResource( 15 )
 unit_name = "Pawn"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonPawn"]
+stream = ExtResource( 44 )
+volume_db = -20.0
 
 [node name="ButtonKnight" type="Button" parent="UI/TowerContainer"]
 margin_left = 258.0
@@ -222,6 +235,10 @@ icon = ExtResource( 10 )
 script = ExtResource( 15 )
 unit_name = "Knight"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonKnight"]
+stream = ExtResource( 44 )
+volume_db = -20.0
+
 [node name="ButtonBishop" type="Button" parent="UI/TowerContainer"]
 margin_left = 306.0
 margin_right = 350.0
@@ -229,6 +246,10 @@ margin_bottom = 38.0
 icon = ExtResource( 12 )
 script = ExtResource( 15 )
 unit_name = "Bishop"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonBishop"]
+stream = ExtResource( 44 )
+volume_db = -20.0
 
 [node name="ButtonRook" type="Button" parent="UI/TowerContainer"]
 margin_left = 354.0
@@ -238,6 +259,10 @@ icon = ExtResource( 9 )
 script = ExtResource( 15 )
 unit_name = "Rook"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonRook"]
+stream = ExtResource( 44 )
+volume_db = -20.0
+
 [node name="ButtonQueen" type="Button" parent="UI/TowerContainer"]
 margin_left = 402.0
 margin_right = 446.0
@@ -246,11 +271,19 @@ icon = ExtResource( 11 )
 script = ExtResource( 15 )
 unit_name = "Queen"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonQueen"]
+stream = ExtResource( 44 )
+volume_db = -20.0
+
 [node name="ButtonSell" type="Button" parent="UI/TowerContainer"]
 margin_left = 450.0
 margin_right = 478.0
 margin_bottom = 38.0
 icon = ExtResource( 41 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TowerContainer/ButtonSell"]
+stream = ExtResource( 44 )
+volume_db = -20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TowerContainer"]
 anims/Open = SubResource( 1 )
@@ -281,6 +314,10 @@ script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/NextWaveContainer/NextWaveButton"]
+stream = ExtResource( 44 )
+volume_db = -20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/NextWaveContainer"]
 anims/Open = SubResource( 4 )

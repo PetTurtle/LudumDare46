@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/button_press.wav-38a3538318c32b35dd125ccedfdbf062.sample"
+
+[deps]
+
+source_file="res://audio/button_press.wav"
+dest_files=[ "res://.import/button_press.wav-38a3538318c32b35dd125ccedfdbf062.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
