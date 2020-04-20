@@ -20,8 +20,8 @@ func set_Unit(value : int, texture : Texture) -> void:
 	sprite = $Sprite
 	health = value
 	sprite.texture = texture
-	sprite.scale.x = 0.5 + health * 0.02
-	sprite.scale.y = 0.5 + health * 0.02
+	sprite.scale.x = 0.5 + health * 0.015
+	sprite.scale.y = 0.5 + health * 0.015
 
 func _move_along_path(distance : float) -> void:
 	var start_point = position

@@ -54,6 +54,8 @@ func get_map_index() -> int:
 	return map_index + 1
 
 func damage_king():
+	if !active:
+		return
 	lives -= 1
 	emit_signal("king_damaged", lives)
 	if lives <= 0:
