@@ -366,7 +366,6 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
-frame = 2
 speed_scale = 2.0
 playing = true
 centered = false
@@ -647,7 +646,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileGhost/Sprite/CostPanel/CostLabel"]
 position = Vector2( 4.74785, -12.489 )
 frames = SubResource( 13 )
-frame = 9
+frame = 7
 speed_scale = 2.0
 playing = true
 centered = false
