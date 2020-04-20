@@ -5,6 +5,8 @@ signal fire(position, moves, direction)
 
 onready var timer : Timer = $Timer
 onready var ySort : YSort = $YSort
+onready var audioPlace : AudioStreamPlayer = $AudioPlace
+onready var audioRemove : AudioStreamPlayer = $AudioRemove
 
 var tower_prefab = load("res://prefabs/Tower.tscn")
 var offset = Vector2(8, 8)
@@ -18,11 +20,15 @@ func create(tower_def : TowerDef, spawnPos : Vector2) -> void:
 	ySort.add_child(tower)
 	tower.set_Tower(tower_def)
 	tower.position = spawnPos + Vector2(8, 8)
+	audioPlace.pitch_scale = rand_range(0.8, 1.2)
+	audioPlace.play()
 
 func remove_at(pos : Vector2):
 	for tower in ySort.get_children():
 		if tower.position == pos + offset:
 			tower.queue_free()
+			audioRemove.pitch_scale = rand_range(0.8, 1.2)
+			audioRemove.play()
 			return
 			
 func tower_def_at(pos : Vector2) -> TowerDef:

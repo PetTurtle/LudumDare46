@@ -7,6 +7,8 @@ signal unit_killed(value)
 
 onready var ySort : YSort = $Units
 onready var wave_controller : WaveController = $WaveController
+onready var audioCoin : AudioStreamPlayer = $AudioCoin
+onready var audioDeath : AudioStreamPlayer = $AudioDeath
 
 export(Array, Texture) var unit_textures
 var game_manager : GameManager
@@ -40,5 +42,9 @@ func _on_death(value):
 	unit_count -= 1
 	game_manager.set_coins(game_manager.get_coins() + value)
 	emit_signal("unit_killed", value)
+	audioCoin.pitch_scale = rand_range(0.8, 1.2)
+	audioCoin.play() 
+	audioDeath.pitch_scale = rand_range(0.8, 1.2)
+	audioDeath.play()
 	if unit_count == 0 and wave_controller.is_wave_over():
 		emit_signal("wave_over")

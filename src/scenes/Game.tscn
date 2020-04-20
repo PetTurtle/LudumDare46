@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/TurretIcons/TurretIcons1.png" type="Texture" id=2]
@@ -41,6 +41,8 @@
 [ext_resource path="res://script_ui/MenuPanel.gd" type="Script" id=39]
 [ext_resource path="res://scripts/TileGhost.gd" type="Script" id=40]
 [ext_resource path="res://assets/X.png" type="Texture" id=41]
+[ext_resource path="res://audio/place.wav" type="AudioStream" id=42]
+[ext_resource path="res://audio/remove.wav" type="AudioStream" id=43]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Open"
@@ -58,9 +60,9 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 370 ), Vector2( 0, 320 ), Vector2( 0, 300 ), Vector2( 0, 330 ), Vector2( 0, 320 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=12]
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Button
 
 signal next_wave()
@@ -69,8 +71,7 @@ func _pressed():
 	emit_signal(\"next_wave\")
 "
 
-[sub_resource type="Animation" id=3]
-resource_name = "Open"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("NextWaveButton:rect_position")
@@ -85,9 +86,9 @@ tracks/0/keys = {
 "values": [ Vector2( -35.21, 60 ), Vector2( -35.21, 5 ), Vector2( -35.21, 20 ), Vector2( -35.2102, 10.3367 ), Vector2( -35.2102, 10.3367 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 30 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 31 ), ExtResource( 21 ), ExtResource( 23 ) ],
 "loop": true,
@@ -95,7 +96,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 33 ), ExtResource( 32 ) ],
 "loop": true,
@@ -103,8 +104,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=7]
-resource_name = "Open"
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("VBoxContainer:rect_position")
@@ -119,14 +119,14 @@ tracks/0/keys = {
 "values": [ Vector2( 100, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=9]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.196078, 0.164706, 0.164706, 0.4 )
 
-[sub_resource type="StyleBoxEmpty" id=10]
-
 [sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -262,7 +262,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -81.0
 margin_top = -54.0
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -277,13 +277,13 @@ margin_top = -0.463288
 margin_right = -35.2102
 margin_bottom = -0.463032
 text = "Next Wave"
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/NextWaveContainer"]
-anims/Open = SubResource( 3 )
+anims/Open = SubResource( 4 )
 
 [node name="StatsPanel" type="Panel" parent="UI"]
 anchor_left = 0.999347
@@ -292,7 +292,7 @@ margin_left = -84.5818
 margin_top = 9.0
 margin_right = -6.58179
 margin_bottom = 90.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
@@ -328,8 +328,8 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
 scale = Vector2( 2, 2 )
-frames = SubResource( 5 )
-frame = 6
+frames = SubResource( 6 )
+frame = 8
 speed_scale = 2.0
 playing = true
 centered = false
@@ -353,12 +353,12 @@ valign = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/LivesPanel"]
 position = Vector2( 2.13086, -0.19371 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 playing = true
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StatsPanel"]
-anims/Open = SubResource( 7 )
+anims/Open = SubResource( 8 )
 
 [node name="MenuPanel" type="Panel" parent="UI"]
 visible = false
@@ -370,7 +370,7 @@ margin_left = -100.0
 margin_top = -54.5
 margin_right = 100.0
 margin_bottom = 54.5
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 9 )
 script = ExtResource( 39 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -458,7 +458,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -0.237839
 margin_bottom = -0.237854
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 10 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -473,7 +473,7 @@ margin_left = -56.0
 margin_top = -50.0
 margin_right = 63.0
 margin_bottom = 59.0
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -523,7 +523,7 @@ margin_left = -76.0
 margin_top = -39.0
 margin_right = 76.0
 margin_bottom = 39.0
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 12 )
 script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -571,11 +571,20 @@ script = ExtResource( 5 )
 [node name="Timer" type="Timer" parent="Towers"]
 autostart = true
 
+[node name="AudioPlace" type="AudioStreamPlayer" parent="Towers"]
+stream = ExtResource( 42 )
+volume_db = -20.0
+
+[node name="AudioRemove" type="AudioStreamPlayer" parent="Towers"]
+stream = ExtResource( 43 )
+volume_db = -20.0
+
 [node name="TileGhost" type="Node2D" parent="."]
 script = ExtResource( 40 )
 x_texture = ExtResource( 41 )
 
 [node name="Sprite" type="Sprite" parent="TileGhost"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.0980392 )
 position = Vector2( 0, -11 )
 texture = ExtResource( 41 )
@@ -600,7 +609,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileGhost/Sprite/CostPanel/CostLabel"]
 position = Vector2( 4.74785, -12.489 )
 frames = SubResource( 13 )
-frame = 1
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false

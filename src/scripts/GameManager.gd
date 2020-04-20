@@ -45,7 +45,9 @@ func next_map():
 	game.load_map(maps[map_index])
 	
 func prev_map():
-	map_index = (map_index - 1) % maps.size()
+	map_index -= 1
+	if map_index < 0:
+		map_index = maps.size()-1
 	game.load_map(maps[map_index])
 	
 func get_map_index() -> int:

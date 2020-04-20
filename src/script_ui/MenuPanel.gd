@@ -15,11 +15,11 @@ func play():
 	
 func next_level():
 	game_manager.next_map()
-	level_label.text = String(game_manager.get_map_index())
+	level_label.text = String(abs(game_manager.get_map_index()))
 	
 func prev_level():
 	game_manager.prev_map()
-	level_label.text = String(game_manager.get_map_index())
+	level_label.text = String(abs(game_manager.get_map_index()))
 
 func show_panel(value : bool):
 	visible = value
