@@ -8,6 +8,7 @@ signal unit_killed(value)
 onready var ySort : YSort = $Units
 onready var wave_controller : WaveController = $WaveController
 
+export(Array, Texture) var unit_textures
 var game_manager : GameManager
 var unit_prefab = load("res://prefabs/Unit.tscn")
 var unit_count : int = 0
@@ -29,7 +30,7 @@ func get_spawners():
 func _on_spawn(value : int, positon : Vector2):
 	var unit : Unit = unit_prefab.instance()
 	ySort.add_child(unit)
-	unit.set_Unit(value)
+	unit.set_Unit(value, unit_textures[randi() % unit_textures.size()])
 	unit.position = positon
 	emit_signal("set_path", unit)
 	unit.connect("death", self, "_on_death")

@@ -16,9 +16,10 @@ func _process(delta: float) -> void:
 	var move_distance = speed * delta
 	_move_along_path(move_distance)
 
-func set_Unit(value : int) -> void:
+func set_Unit(value : int, texture : Texture) -> void:
 	sprite = $Sprite
 	health = value
+	sprite.texture = texture
 	sprite.scale.x = 0.5 + health * 0.02
 	sprite.scale.y = 0.5 + health * 0.02
 

@@ -34,10 +34,12 @@ func _process(_delta):
 			pass
 		Mode.BUY:
 			if map.can_build_turret():
-				tile_ghost.show_ghost(map.get_snapped_mouse_position(), game_data.get_tower_def(tower_name).get_default_texture())
+				var cost = game_data.get_tower_cost(tower_name)
+				tile_ghost.show_ghost(map.get_snapped_mouse_position(), cost, game_data.get_tower_def(tower_name).get_default_texture())
 		Mode.SELL:
 			if map.has_turret():
-				tile_ghost.show_ghost(map.get_snapped_mouse_position())
+				var cost = game_data.get_tower_cost(tower_name)
+				tile_ghost.show_ghost(map.get_snapped_mouse_position(), cost/2)
 				
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
