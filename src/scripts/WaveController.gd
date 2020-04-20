@@ -40,7 +40,7 @@ func is_wave_over():
 func _on_spawn():
 	if value_left > 0:
 		iterator = (iterator + 1) % spawnPoints.size()
-		var value : int = int(rand_range(1, min(waveCount, max_value)))
+		var value : int = int(rand_range(max(waveCount - 8, 1), waveCount))*1.2
 		if value > value_left:
 			value = value_left
 		value_left -= value

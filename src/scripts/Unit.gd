@@ -3,7 +3,7 @@ class_name Unit
 
 signal death(value)
 
-var speed : float = 30
+var speed : float = 20
 
 var health : int = 1
 var sprite : Sprite = null
@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 func set_Unit(value : int, texture : Texture) -> void:
 	sprite = $Sprite
 	health = value
+	speed = 20 + value * 1.2
 	sprite.texture = texture
 	sprite.scale.x = 0.5 + health * 0.015
 	sprite.scale.y = 0.5 + health * 0.015
