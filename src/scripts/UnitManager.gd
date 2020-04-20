@@ -42,9 +42,11 @@ func _on_death(value):
 	unit_count -= 1
 	game_manager.set_coins(game_manager.get_coins() + value)
 	emit_signal("unit_killed", value)
-	audioCoin.pitch_scale = rand_range(0.8, 1.2)
-	audioCoin.play() 
-	audioDeath.pitch_scale = rand_range(0.8, 1.2)
-	audioDeath.play()
+	if !audioCoin.playing || audioCoin.get_playback_position() > 0.05:
+		audioCoin.pitch_scale = rand_range(0.8, 1.2)
+		audioCoin.play()
+	if !audioDeath.playing || audioDeath.get_playback_position() > 0.05:
+		audioDeath.pitch_scale = rand_range(0.8, 1.2)
+		audioDeath.play()
 	if unit_count == 0 and wave_controller.is_wave_over():
 		emit_signal("wave_over")
