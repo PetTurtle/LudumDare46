@@ -10,6 +10,7 @@ onready var ui : UI = $UI
 onready var towers : Towers = $Towers
 onready var bullets : Bullets = $Bullets
 onready var tile_ghost : TileGhost = $TileGhost
+onready var sell_ghost : TileGhost = $SellGhost
 
 var game_manager : GameManager
 var game_data : GameData
@@ -26,20 +27,23 @@ func _ready():
 	game_manager.connect("game_start", self, "start_game")
 	game_manager.connect("game_over", self, "game_over")
 	game_manager.connect("main_menu", self, "end_game")
-	
+
 func _process(_delta):
-	tile_ghost.hide_ghost()
 	match mode:
 		Mode.IDLE:
 			pass
 		Mode.BUY:
 			if map.can_build_turret():
-				var cost = game_data.get_tower_cost(tower_name)
-				tile_ghost.show_ghost(map.get_snapped_mouse_position(), cost, game_data.get_tower_def(tower_name).get_default_texture())
+				tile_ghost.position = map.get_snapped_mouse_position()
+				
 		Mode.SELL:
+			sell_ghost.position = map.get_snapped_mouse_position()
 			if map.has_turret():
 				var cost = game_data.get_tower_cost(tower_name)
-				tile_ghost.show_ghost(map.get_snapped_mouse_position(), cost/2)
+				sell_ghost.show_ghost()
+				sell_ghost.set_cost(cost / 2)
+			else:
+				sell_ghost.cost_panel.hide()
 				
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
@@ -57,6 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					towers.create(game_data.get_tower_def(tower_name), map.get_snapped_mouse_position())
 					game_manager.set_coins(game_manager.get_coins() - cost)
 					game_data.add_tower(tower_name)
+					tile_ghost.hide_ghost()
 					
 			Mode.SELL: # ____SELL____
 				if map.has_turret():
@@ -67,6 +72,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					towers.remove_at(pos)
 					game_manager.set_coins(game_manager.get_coins() + cost/2)
 					game_data.remove_tower(tower_def.name)
+					sell_ghost.cost_panel.hide()
+				
 					
 	elif event.button_index == BUTTON_RIGHT:
 		match mode:
@@ -103,10 +110,20 @@ func delete_map():
 func _on_mode_buy(name):
 	mode = Mode.BUY
 	tower_name = name
+	sell_ghost.hide_ghost()
+	
+	var cost = game_data.get_tower_cost(tower_name)
+	var tower_def = game_data.get_tower_def(tower_name)
+	tile_ghost.attack_cells.tower_def = tower_def
+	tile_ghost.attack_cells.update()
+	tile_ghost.show_ghost(tower_def.get_default_texture())
+	tile_ghost.set_cost(cost)
 	
 func _on_mode_sell():
 	mode = Mode.SELL
-	
+	tile_ghost.hide_ghost()
+	sell_ghost.show_ghost()
+
 func _on_fire(pos, moves, direction):
 	if map.is_pathable(pos):
 		bullets.create(pos, moves, direction)

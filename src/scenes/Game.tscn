@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scripts/Bullets.gd" type="Script" id=1]
 [ext_resource path="res://assets/TurretIcons/TurretIcons1.png" type="Texture" id=2]
@@ -44,6 +44,8 @@
 [ext_resource path="res://audio/place.wav" type="AudioStream" id=42]
 [ext_resource path="res://audio/remove.wav" type="AudioStream" id=43]
 [ext_resource path="res://audio/button_press.wav" type="AudioStream" id=44]
+[ext_resource path="res://scripts/AttackCells.gd" type="Script" id=45]
+[ext_resource path="res://scenes/BuyGhost.gd" type="Script" id=46]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Open"
@@ -142,6 +144,46 @@ animations = [ {
 } ]
 
 [sub_resource type="Animation" id=14]
+resource_name = "Jump"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.499444, 0.992978 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00295529, 0.500922, 0.994456 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.72549 ), Color( 1, 1, 1, 0.0980392 ), Color( 1, 1, 1, 0.72549 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.00295529, 0.5024, 0.982634 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
 resource_name = "Jump"
 loop = true
 tracks/0/type = "value"
@@ -366,6 +408,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="UI/StatsPanel/VBoxContainer/CoinsPanel"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
+frame = 5
 speed_scale = 2.0
 playing = true
 centered = false
@@ -617,13 +660,12 @@ stream = ExtResource( 43 )
 volume_db = -20.0
 
 [node name="TileGhost" type="Node2D" parent="."]
-script = ExtResource( 40 )
-x_texture = ExtResource( 41 )
+visible = false
+script = ExtResource( 46 )
 
 [node name="Sprite" type="Sprite" parent="TileGhost"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.0980392 )
-position = Vector2( 0, -11 )
+position = Vector2( 8, 0 )
 texture = ExtResource( 41 )
 
 [node name="CostPanel" type="Node2D" parent="TileGhost/Sprite"]
@@ -646,7 +688,6 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileGhost/Sprite/CostPanel/CostLabel"]
 position = Vector2( 4.74785, -12.489 )
 frames = SubResource( 13 )
-frame = 7
 speed_scale = 2.0
 playing = true
 centered = false
@@ -654,6 +695,50 @@ centered = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TileGhost/Sprite/CostPanel"]
 autoplay = "Jump"
 anims/Jump = SubResource( 14 )
+
+[node name="AttackCells" type="Node2D" parent="TileGhost"]
+show_behind_parent = true
+position = Vector2( 8, -3 )
+script = ExtResource( 45 )
+
+[node name="SellGhost" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 40 )
+x_texture = ExtResource( 41 )
+
+[node name="Sprite" type="Sprite" parent="SellGhost"]
+self_modulate = Color( 1, 1, 1, 0.0980392 )
+position = Vector2( 8, 0 )
+texture = ExtResource( 41 )
+offset = Vector2( 0, 8 )
+
+[node name="CostPanel" type="Node2D" parent="SellGhost/Sprite"]
+position = Vector2( 0, 1.99401 )
+
+[node name="CostLabel" type="Label" parent="SellGhost/Sprite/CostPanel"]
+margin_left = -12.5454
+margin_top = -21.6293
+margin_right = 13.4546
+margin_bottom = -9.62934
+custom_fonts/font = ExtResource( 35 )
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SellGhost/Sprite/CostPanel/CostLabel"]
+position = Vector2( 4.74785, -12.489 )
+frames = SubResource( 13 )
+speed_scale = 2.0
+playing = true
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SellGhost/Sprite/CostPanel"]
+autoplay = "Jump"
+anims/Jump = SubResource( 15 )
 [connection signal="pressed" from="UI/TowerContainer/ButtonSell" to="UI/TowerContainer" method="_on_ButtonSell_pressed"]
 [connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/LeftButton" to="UI/MenuPanel" method="prev_level"]
 [connection signal="pressed" from="UI/MenuPanel/LevelPanel/HBox/PlayButton" to="UI/MenuPanel" method="play"]
